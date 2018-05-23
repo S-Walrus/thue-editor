@@ -10,7 +10,8 @@ body {
   left: 0;
   --background: #1d2226;
   --size: 1.2;
-  height: 25%;
+  height: 25vh;
+  z-index: 20;
 }
 
 #top-bar {
@@ -71,4 +72,5 @@ h4 {
 
 .CodeMirror {
   font-size: 1.2em;
+  height: calc(75vh - 26px);
 }
