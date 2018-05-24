@@ -55,14 +55,13 @@ function run() {
 				return 0;
 			}
 			line = line.text.split(" -> ");
-			console.log(line);
 			if (line.length == 2) {
 				var n = mainstring.search(line[0]);
 				if (n >= 0) {
 					var a = mainstring.substring(0 , n);
 					var b = mainstring.substring(n + line[0].length);
 					mainstring = a + line[1] + b;
-					terminal.set_prompt(mainstring);
+					terminal.set_prompt('[[b;green;]' + mainstring + ']');
 				}
 			}
 		})
