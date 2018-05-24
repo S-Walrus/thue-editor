@@ -70,6 +70,9 @@ function run() {
 					var b = mainstring.substring(n + text[0].length);
 					if (text[1] == '~') {
 						if (input.length == 0) {
+							if (waitLine === null) {
+								terminal.echo(mainstring);
+							}
 							waitLine = codemirror.getLineNumber(line);
 							terminal.set_prompt(defaultPrompt);
 						} else {
