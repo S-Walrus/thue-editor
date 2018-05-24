@@ -54,7 +54,7 @@ $(document).ready(function() {
 	$('#info').on('click', function() {
 		window.notificationService.notify({
 				title: 'Syntax',
-				text: 'To replace A with B: A -> B, to get input with removing A: A -> ~, to print TEXT with removing A: A -> ~TEXT',
+				text: 'To replace A with B: A -> B, to get input with removing A: A -> ~, to print TEXT with removing A: A -> ~TEXT, NOTE: the main string is the last line of the code',
 				type: 'warning',
 				position: 'top-right',
 				autoClose: false,
