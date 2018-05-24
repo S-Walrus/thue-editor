@@ -3,6 +3,9 @@ var mainstring;
 var codemirror;
 var timerId;
 var started = false;
+var input = [];
+var defaultPrompt;
+var waitLine = null;
 
 CodeMirror.defineMode("thue", function() {
 	return {
@@ -19,26 +22,31 @@ CodeMirror.defineMode("thue", function() {
 });
 
 $(document).ready(function() {
+	// Init the terminal
 	terminal = $('#terminal').terminal(function(command, term) {
-
+		input.push(command);
 	}, {
 		greetings: "JQuery Terminal:\nCopyright (c) 2011-2018 Jakub Jankiewicz <http://jcubic.pl/me>"
 	});
 
+	defaultPrompt = terminal.get_prompt();
+
+	// Init the editor
 	codemirror = CodeMirror.fromTextArea($("textarea").get(0), {
 		theme: "duotone-dark",
 		lineNumbers: true,
 		mode: "thue"
 	});
 
+	// Buttons
 	$('#run').on('click', function() {
 		run();
 	});
-	
+
 	$('#pause').on('click', function() {
 		pause();
 	});
-	
+
 	$('#stop').on('click', function() {
 		stop();
 	});
@@ -54,17 +62,29 @@ function run() {
 			if (line.text == "") {
 				return 0;
 			}
-			line = line.text.split(" -> ");
-			if (line.length == 2) {
-				var n = mainstring.search(line[0]);
+			text = line.text.split(" -> ");
+			if (text.length == 2) {
+				var n = mainstring.search(text[0]);
 				if (n >= 0) {
 					var a = mainstring.substring(0 , n);
-					var b = mainstring.substring(n + line[0].length);
-					mainstring = a + line[1] + b;
-					terminal.set_prompt('[[b;green;]' + mainstring + ']');
+					var b = mainstring.substring(n + text[0].length);
+					if (text[1] == '~') {
+						if (input.length == 0) {
+							waitLine = codemirror.getLineNumber(line);
+							terminal.set_prompt(defaultPrompt);
+						} else {
+							mainstring = a + input.pop() + b;
+							waitLine = null;
+						}
+					} else {
+						mainstring = a + text[1] + b;
+					}
+					if (waitLine === null) {
+						terminal.set_prompt('[[b;green;]' + mainstring + ']');
+					}
 				}
 			}
-		})
+		});
 	}, 100);
 }
 
