@@ -50,6 +50,18 @@ $(document).ready(function() {
 	$('#stop').on('click', function() {
 		stop();
 	});
+
+	$('#info').on('click', function() {
+		window.notificationService.notify({
+				title: 'Syntax',
+				text: 'To replace A with B: A -> B, to get input with removing A: A -> ~, to print TEXT with removing A: A -> ~TEXT',
+				type: 'warning',
+				position: 'top-right',
+				autoClose: false,
+				duration: 18000,
+				showRemoveButton: true
+})
+	})
 });
 
 function run() {
