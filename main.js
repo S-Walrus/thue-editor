@@ -79,6 +79,9 @@ function run() {
 							mainstring = a + input.pop() + b;
 							waitLine = null;
 						}
+					} else if (text[1][0] == '~') {
+						terminal.echo('[[b;green;]' + text[1].slice(1) + ']');
+						mainstring = a + b;
 					} else {
 						mainstring = a + text[1] + b;
 					}
