@@ -58,22 +58,29 @@ $(document).ready(function() {
 });
 
 function run() {
+	// Get mainstring
 	if (!started) {
 		started = true;
 		mainstring = codemirror.getLine(codemirror.lastLine());
 	}
+	// Set timer
 	timerId = setInterval (function() {
+		// Go throught each line of code
 		codemirror.eachLine(codemirror.firstLine(), codemirror.lastLine(), function(line) {
+			// If line.text == "", line.text.split.length doesn't exist
 			if (line.text == "") {
 				return 0;
 			}
+
 			text = line.text.split(" -> ");
 			if (text.length == 2) {
+				// Index of the first entry
 				var n = mainstring.search(text[0]);
 				if (n >= 0) {
 					var a = mainstring.substring(0 , n);
 					var b = mainstring.substring(n + text[0].length);
 					if (text[1] == '~') {
+						// Get input
 						if (input.length == 0) {
 							if (waitLine === null) {
 								terminal.echo(mainstring);
@@ -85,9 +92,11 @@ function run() {
 							waitLine = null;
 						}
 					} else if (text[1][0] == '~') {
+						// Output
 						terminal.echo('[[b;green;]' + text[1].slice(1) + ']');
 						mainstring = a + b;
 					} else {
+						// Replace
 						mainstring = a + text[1] + b;
 					}
 					if (waitLine === null) {
