@@ -6,6 +6,7 @@ var started = false;
 var input = [];
 var defaultPrompt;
 var waitLine = null;
+var selectedLevel;
 
 CodeMirror.defineMode("thue", function() {
 	return {
@@ -38,6 +39,15 @@ $(document).ready(function() {
 		mode: "thue"
 	});
 
+	// Levels
+	$('.level').on('click', function() {
+		if (selectedLevel != null) {
+			selectedLevel.css('border-left', '0');
+		}
+		selectedLevel = $(this);
+		$(this).css('border-left', '6px solid #D7443F');
+	});
+
 	// Buttons
 	$('#run').on('click', function() {
 		run();
@@ -65,6 +75,7 @@ function run() {
 	}
 	// Set timer
 	timerId = setInterval (function() {
+		var edited = false;
 		// Go throught each line of code
 		codemirror.eachLine(codemirror.firstLine(), codemirror.lastLine(), function(line) {
 			// If line.text == "", line.text.split.length doesn't exist
@@ -105,6 +116,9 @@ function run() {
 				}
 			}
 		});
+		if (!edited) {
+			stop();
+		}
 	}, 100);
 }
 
