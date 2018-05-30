@@ -73,3 +73,26 @@ div.line {
 	color: #F1ECE9;
 	font-family: sans-serif;
 }
+
+.level:hover {
+	background-color: #333A42;
+}
+
+.level-button {
+	margin-top: -5px;
+	padding: 5px;
+	display: inline;
+	color: #F1ECE9;
+	text-align: center;
+	float: right;
+	height: 20px;
+}
+
+.level-button:hover {
+	background-color: #606b75;
+}
+
+.level-button:active {
+	background-color: #1d2226;
+	color: #e0d5ce;
+}
