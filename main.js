@@ -41,11 +41,17 @@ $(document).ready(function() {
 
 	// Levels
 	$('.level').on('click', function() {
+		// Remove last selected level style
 		if (selectedLevel != null) {
-			selectedLevel.css('border-left', '0');
+			selectedLevel.css('box-shadow', 'none');
+			var html = selectedLevel.html();
+			selectedLevel.html(html.slice(0, html.search('<')));
 		}
+		// Set new selected level
 		selectedLevel = $(this);
-		$(this).css('border-left', '6px solid #D7443F');
+		selectedLevel.css('box-shadow', 'inset 5px 0 0 0 #D7443F');
+		selectedLevel.html(selectedLevel.html() + '<div class="level-button" id="run-tests"><i class="fa fa-play"></i></div>');
+		// TODO описывать тест в консоли
 	});
 
 	// Buttons
@@ -63,7 +69,6 @@ $(document).ready(function() {
 
 	$('#info').on('click', function() {
 		// TODO info page
-		// TODO make #info <a>
 	});
 });
 
@@ -88,7 +93,7 @@ function run() {
 				// Index of the first entry
 				var n = mainstring.search(text[0]);
 				if (n >= 0) {
-					var a = mainstring.substring(0 , n);
+					var a = mainstring.substring(0, n);
 					var b = mainstring.substring(n + text[0].length);
 					if (text[1] == '~') {
 						// Get input
