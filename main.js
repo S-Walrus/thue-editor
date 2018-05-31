@@ -39,6 +39,11 @@ $(document).ready(function() {
 		mode: "thue"
 	});
 
+	// The file is downloaded from GitHub because it throws error when the file is downloaded from local server
+	$.getJSON("https://raw.githubusercontent.com/S-Walrus/thue-editor/master/levels.json", function(data) {
+	  levels = data;
+	});
+
 	// Levels
 	$('.level').on('click', function() {
 		// Remove last selected level style
@@ -51,7 +56,7 @@ $(document).ready(function() {
 		selectedLevel = $(this);
 		selectedLevel.css('box-shadow', 'inset 5px 0 0 0 #D7443F');
 		selectedLevel.html(selectedLevel.html() + '<div class="level-button" id="run-tests"><i class="fa fa-play"></i></div>');
-		// TODO описывать тест в консоли
+		terminal.echo(levels[selectedLevel.attr('level')].description);
 	});
 
 	// Buttons
