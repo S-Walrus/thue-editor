@@ -39,12 +39,6 @@ $(document).ready(function() {
 		mode: "thue"
 	});
 
-	// Download a levels data
-	// The file is downloaded from GitHub because it throws an error when the file is downloaded from local server
-	$.getJSON("https://raw.githubusercontent.com/S-Walrus/thue-editor/master/levels.json", function(data) {
-	  levels = data;
-	});
-
 	// Levels
 	$('.level').on('click', function() {
 		// Remove last selected level style
@@ -77,7 +71,7 @@ $(document).ready(function() {
 	});
 
 	$('#check').on('click', function() {
-		// TODO run tests
+		check();
 	});
 });
 
