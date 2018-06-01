@@ -39,7 +39,8 @@ $(document).ready(function() {
 		mode: "thue"
 	});
 
-	// The file is downloaded from GitHub because it throws error when the file is downloaded from local server
+	// Download a levels data
+	// The file is downloaded from GitHub because it throws an error when the file is downloaded from local server
 	$.getJSON("https://raw.githubusercontent.com/S-Walrus/thue-editor/master/levels.json", function(data) {
 	  levels = data;
 	});
@@ -50,12 +51,11 @@ $(document).ready(function() {
 		if (selectedLevel != null) {
 			selectedLevel.css('box-shadow', 'none');
 			var html = selectedLevel.html();
-			selectedLevel.html(html.slice(0, html.search('<')));
 		}
 		// Set new selected level
 		selectedLevel = $(this);
 		selectedLevel.css('box-shadow', 'inset 5px 0 0 0 #D7443F');
-		selectedLevel.html(selectedLevel.html() + '<div class="level-button" id="run-tests"><i class="fa fa-play"></i></div>');
+		terminal.echo('[[b;green;]' + selectedLevel.html() + ']');
 		terminal.echo(levels[selectedLevel.attr('level')].description);
 	});
 
@@ -74,6 +74,10 @@ $(document).ready(function() {
 
 	$('#info').on('click', function() {
 		// TODO info page
+	});
+
+	$('#check').on('click', function() {
+		// TODO run tests
 	});
 });
 
