@@ -1,12 +1,8 @@
-var terminal;
-//var mainstring;
-var codemirror;
-//var timerId;
-//var started = false;
-var input = [];
-var defaultPrompt;
-//var waitLine = null;
-var selectedLevel;
+let terminal;
+let codemirror;
+let input = [];
+let defaultPrompt;
+let selectedLevel;
 
 CodeMirror.defineMode("thue", function() {
 	return {
@@ -55,7 +51,7 @@ $(document).ready(function() {
 
 	// Buttons
 	$('#run').on('click', function() {
-		run();
+		run(codemirror.getValue());
 	});
 
 	$('#pause').on('click', function() {
@@ -63,11 +59,7 @@ $(document).ready(function() {
 	});
 
 	$('#stop').on('click', function() {
-		stop();
-	});
-
-	$('#info').on('click', function() {
-		// TODO info page
+		finish();
 	});
 
 	$('#check').on('click', function() {
@@ -75,66 +67,24 @@ $(document).ready(function() {
 	});
 });
 
-// function run() {
-// 	// Get mainstring
-// 	if (!started) {
-// 		started = true;
-// 		mainstring = codemirror.getLine(codemirror.lastLine());
-// 	}
-// 	// Set timer
-// 	timerId = setInterval (function() {
-// 		var edited = false;
-// 		// Go throught each line of code
-// 		codemirror.eachLine(codemirror.firstLine(), codemirror.lastLine(), function(line) {
-// 			// If line.text == "", line.text.split.length doesn't exist
-// 			if (line.text == "") {
-// 				return 0;
-// 			}
 
-// 			text = line.text.split(" -> ");
-// 			if (text.length == 2) {
-// 				// Index of the first entry
-// 				var n = mainstring.search(text[0]);
-// 				if (n >= 0) {
-// 					var a = mainstring.substring(0, n);
-// 					var b = mainstring.substring(n + text[0].length);
-// 					if (text[1] == '~') {
-// 						// Get input
-// 						if (input.length == 0) {
-// 							if (waitLine === null) {
-// 								terminal.echo(mainstring);
-// 							}
-// 							waitLine = codemirror.getLineNumber(line);
-// 							terminal.set_prompt(defaultPrompt);
-// 						} else {
-// 							mainstring = a + input.pop() + b;
-// 							waitLine = null;
-// 						}
-// 					} else if (text[1][0] == '~') {
-// 						// Output
-// 						terminal.echo('[[b;green;]' + text[1].slice(1) + ']');
-// 						mainstring = a + b;
-// 					} else {
-// 						// Replace
-// 						mainstring = a + text[1] + b;
-// 					}
-// 					if (waitLine === null) {
-// 						terminal.set_prompt('[[b;green;]' + mainstring + ']');
-// 					}
-// 				}
-// 			}
-// 		});
-// 		if (!edited) {
-// 			stop();
-// 		}
-// 	}, 100);
-// }
+// Functions for thue.ts
+function setPrompt(text) {
+	terminal.set_prompt('[[b;green;]' + text + ']');
+}
 
-// function pause() {
-// 	clearInterval(timerId);
-// }
+function setDefaultPrompt() {
+	terminal.set_prompt(defaultPrompt);
+}
 
-// function stop() {
-// 	pause();
-// 	started = false;
-// }
+function echo(text) {
+	terminal.echo(text);
+}
+
+function echoGreen(text) {
+	terminal.echo('[[b;green;]' + text + ']');
+}
+
+function error(text) {
+	reminal.error(text);
+}
