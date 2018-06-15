@@ -77,7 +77,7 @@ function passProgram(program: Array<Array<string>>) : boolean {
 		}
 
 		if (item.length == 2) {
-			let index = mainstring.search(item[0]);
+			let index = mainstring.indexOf(item[0]);
 			if (index != -1) {
 
 				// mainstring == a + item[0] + b
