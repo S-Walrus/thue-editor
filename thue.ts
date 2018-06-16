@@ -6,6 +6,7 @@ let running: boolean = false;			// True if the timer is set to run program
 let started: boolean = false;			// True if the program should be killed before running
 let timerId: number;
 let waitForInput: boolean = false;
+let iterCount: number;
 
 
 // Start running the program
@@ -24,6 +25,8 @@ function run(code: string) : void {
 		if (!started) {
 			// Read mainstring
 			mainstring = lines[lines.length - 1];
+			// Reset the iteration counter
+			iterCount = 0;
 		}
 		
 		started = true;
@@ -40,6 +43,8 @@ function run(code: string) : void {
 
 				if (!edited) {
 					finish();
+				} else {
+					iterCount++;
 				}
 			}
 
@@ -67,6 +72,7 @@ function kill() : void {
 // Finish running the program and print result
 function finish() {
 	echoGreen(mainstring);
+	echo('Program completed in ' + iterCount + ' iterations.');
 	setDefaultPrompt();
 	kill();
 }

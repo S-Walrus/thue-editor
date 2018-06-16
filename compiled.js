@@ -5,6 +5,7 @@ var running = false;
 var started = false;
 var timerId;
 var waitForInput = false;
+var iterCount;
 function run(code) {
     if (!running) {
         var lines = code.split('\n');
@@ -14,6 +15,7 @@ function run(code) {
         });
         if (!started) {
             mainstring = lines[lines.length - 1];
+            iterCount = 0;
         }
         started = true;
         timerId = setInterval(function () {
@@ -23,6 +25,9 @@ function run(code) {
                 var edited = passProgram(program_1);
                 if (!edited) {
                     finish();
+                }
+                else {
+                    iterCount++;
                 }
             }
         }, interval);
@@ -44,6 +49,7 @@ function kill() {
 }
 function finish() {
     echoGreen(mainstring);
+    echo('Program have been completed in ' + iterCount + ' iterations.');
     setDefaultPrompt();
     kill();
 }

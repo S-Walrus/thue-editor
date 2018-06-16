@@ -4,7 +4,6 @@ let levels;
 // The file is downloaded from GitHub because it throws an error when the file is downloaded from local server
 $.getJSON("https://raw.githubusercontent.com/S-Walrus/thue-editor/master/levels.json", function(data) {
 	levels = data;
-	console.log(data);
 	for (let i = 0; i < data.length; i++) {
 		$('#level-box').append('<div class="level" level=' + i + '>' + data[i].title + '</div>');
 	};
