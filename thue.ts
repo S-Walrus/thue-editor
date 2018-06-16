@@ -15,11 +15,18 @@ function run(code: string) : void {
 
 		// Parse the code
 		let lines: Array<string> = code.split('\n');
-		mainstring = lines[lines.length - 1];
 		let program: Array<Array<string>> = [];
-		lines.forEach((item: string, i: number) => {
+		lines.slice(0, -1).forEach((item: string, i: number) => {
 			program.push(item.split(' -> '));
 		});
+
+		// If we are not continuing the program,
+		if (!started) {
+			// Read mainstring
+			mainstring = lines[lines.length - 1];
+		}
+		
+		started = true;
 
 		// Run the program
 		timerId = setInterval(() => {

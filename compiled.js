@@ -8,11 +8,14 @@ var waitForInput = false;
 function run(code) {
     if (!running) {
         var lines = code.split('\n');
-        mainstring = lines[lines.length - 1];
         var program_1 = [];
-        lines.forEach(function (item, i) {
+        lines.slice(0, -1).forEach(function (item, i) {
             program_1.push(item.split(' -> '));
         });
+        if (!started) {
+            mainstring = lines[lines.length - 1];
+        }
+        started = true;
         timerId = setInterval(function () {
             if (!waitForInput || input.length != 0) {
                 setPrompt(mainstring);
