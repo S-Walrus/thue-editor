@@ -2,19 +2,78 @@
   {
   	"title": "Output",
   	"description": "At this level you must get input and put it to the main string.\nAll chars are free exept of digits.\nTip: press info button on the top bar\n[[b;yellow;]123 => 123]",
-  	"input": ["1", "123", "968749", "000000", "0100011100101"],
+  	"input": [
+      ["1"],
+      ["123"],
+      ["968749"],
+      ["000000"],
+      ["0100011100101"]
+    ],
   	"output": ["1", "123", "968749", "000000", "0100011100101"]
   },
   {
-  	"title": "Output1",
-  	"description": "At this level you must get input and put it to the main string\nTo replace [a] with the input string, type [a] -> ~\nAll chars exept of digits are free\n[[b;yellow;]123 => 123]",
-  	"input": ["1", "123", "968749", "000000", "0100011100101"],
-  	"output": ["1", "123", "968749", "000000", "0100011100101"]
+    "title": "Increment",
+    "description": "You get a binary number (consisting of 0s and/or 1s) and you must return (set the mainstring to) the same number, increased by 1 (also binary)\n[[b;yellow;]101 => 110\n11=>100]",
+    "input": [
+      ["0"],
+      ["11"],
+      ["101"],
+      ["111111"],
+      ["1010101010"],
+      ["10000000"]
+    ],
+    "output": ["1", "100", "110", "1000000", "1010101011", "10000001"]
   },
   {
-  	"title": "Output2",
-  	"description": "At this level you must get input and put it to the main string\nTo replace [a] with the input string, type [a] -> ~\nAll chars exept of digits are free\n[[b;yellow;]123 => 123]",
-  	"input": ["1", "123", "968749", "000000", "0100011100101"],
-  	"output": ["1", "123", "968749", "000000", "0100011100101"]
+    "title": "Loop",
+    "description": "You get a binary number and you must return a string, consisting of amount of 'x', equal to the passed number\n[[b;yellow;]100 => xxxx\n10010 => xxxxxxxxxxxxxxxxxx\n0 => ]",
+    "input": [
+      ["0"],
+      ["1"],
+      ["1000"],
+      ["111"],
+      ["10101"],
+      ["1001"]
+    ],
+    "output": ["", "x", "xxxxxxxx", "xxxxxxx", "xxxxxxxxxxxxxxxxxxx", "xxxxxxxxx"]
+  },
+  {
+    "title": "Sum",
+    "description": "Return a sum of two passed binary numbers. Output must be without 0s at the begining.\nBoth numbers are the same length!\nNote: read the first number and then read the second one (not together).\n[[b;yellow;]1, 1 => 10\n010, 100 => 110\n010, 001 => 11]",
+    "input": [
+      ["1", "1"],
+      ["010", "100"],
+      ["010", "001"],
+      ["111", "111"],
+      ["10101", "01010"],
+      ["1111", "0000"],
+      ["0", "1"],
+      ["1101100000110110", "1110011011100101"]
+    ],
+    "output": ["10", "110", "11", "1110", "11111", "1111", "1", "011011111100011011"]
+  },
+  {
+    "title": "Multiplication",
+    "description": "Coming soon...",
+    "input": [
+      
+    ],
+    "output": []
+  },
+  {
+    "title": "Sorting",
+    "description": "Coming soon...",
+    "input": [
+      
+    ],
+    "output": []
+  },
+  {
+    "title": "Fibonacci numbers",
+    "description": "Coming soon...",
+    "input": [
+      
+    ],
+    "output": []
   }
  ]
