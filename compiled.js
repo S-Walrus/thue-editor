@@ -49,7 +49,7 @@ function kill() {
 }
 function finish() {
     echoGreen(mainstring);
-    echo('Program have been completed in ' + iterCount + ' iterations.');
+    echo('Program completed in ' + iterCount + ' iterations.');
     setDefaultPrompt();
     kill();
 }

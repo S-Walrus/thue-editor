@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Thue Info</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Roboto+Mono" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="src/wysiwyg.css">
+	<link rel="stylesheet" href="info.css">
+</head>
+<body>
+	<main class="wysiwyg">
+		<h2>Thue</h2>
+		<p>Thue is an esoteric programming language, which uses simple commands to iterate over a single string.</p>
+		<p><b>Note:</b> this editor uses NOT the original language but Thue with syntax modifications and a few other modifications, being described below.</p>
+		<p><b>Main string</b> is a single string over which the program iterates. In the editor, the main string is the last line of code.</p>
+		<p>One <b>command</b> is a line of code, consisting of an <b>original</b> string, operator <code>-></code> (with spaces on the sides) and a <b>replacement</b> string. If the original string is found in the main string, it is replaced by the replacement string.</p>
+		<div class="code">aaa -> xyz</div>
+		<p>To get a string from the <b>input</b> stream, set the replacement string to <code>~</code>.</p>
+		<div class="code">aaa -> ~</div>
+		<p>To <b>print</b> something to the console, start the replacement string with <code>~</code> and then type the string to be printed.</p>
+		<div class="code">aaa -> ~Hello World!</div>
+		<p>Lines of code without <code>-></code> operator are skipped, so you are free to make <b>comments</b>.</p>
+		<div class="code">
+			A very useful comment<br>
+			a -> b<br>
+			But the second line is not a comment
+		</div>
+		<p><b>Note:</b> don't use <code>-></code> operator in original or replacement strings.</p>
+	</main>
+</body>
+</html>

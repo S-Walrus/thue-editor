@@ -43,8 +43,6 @@ function run(code: string) : void {
 
 				if (!edited) {
 					finish();
-				} else {
-					iterCount++;
 				}
 			}
 
@@ -119,6 +117,7 @@ function passProgram(program: Array<Array<string>>) : boolean {
 				}
 				// If a substring to replace has been found, set edited true
 				edited = true;
+				iterCount++;
 			}
 		}
 	});
