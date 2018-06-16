@@ -1,27 +1,46 @@
-var levels;
+let levels;
 
 // Download a levels data
 // The file is downloaded from GitHub because it throws an error when the file is downloaded from local server
 $.getJSON("https://raw.githubusercontent.com/S-Walrus/thue-editor/master/levels.json", function(data) {
-  levels = data;
+	levels = data;
+	console.log(data);
+	for (let i = 0; i < data.length; i++) {
+		$('#level-box').append('<div class="level" level=' + i + '>' + data[i].title + '</div>');
+	};
+
+	// On click
+	$('.level').on('click', function() {
+		// Remove last selected level style
+		if (selectedLevel != null) {
+			selectedLevel.css('box-shadow', 'none');
+			let html = selectedLevel.html();
+		}
+		// Set new selected level
+		selectedLevel = $(this);
+		selectedLevel.css('box-shadow', 'inset 5px 0 0 0 #D7443F');
+		terminal.echo(' ');
+		terminal.echo('[[b;green;]' + selectedLevel.html() + ']');
+		terminal.echo(levels[selectedLevel.attr('level')].description);
+	});
 });
 
 
 // Returns true if the test is completed, false otherwise
 function runTest(input, output, test_num) {
-	var code = codemirror.getValue().split('\n');
-	var mainstring = code.pop();
-	var edited = true;
+	let code = codemirror.getValue().split('\n');
+	let mainstring = code.pop();
+	let edited = true;
 
 	while (edited) {
 		edited = false;
 		$.each(code, function(index, com) {
 			com = com.split(' -> ');
 			if (com.length > 1) {
-				var n = mainstring.search(com[0]);
+				let n = mainstring.search(com[0]);
 				if (n >= 0) {
-					var a = mainstring.substring(0, n);
-					var b = mainstring.substring(n + com[0].length);
+					let a = mainstring.substring(0, n);
+					let b = mainstring.substring(n + com[0].length);
 
 					if (com[1] == '~') {
 						mainstring = a + input + b;
@@ -51,10 +70,10 @@ function check() {
 	terminal.set_prompt(defaultPrompt);
 	terminal.echo(' ');
 	if (selectedLevel != undefined) {
-		var input_list = levels[selectedLevel.attr("level")].input;
-		var output_list = levels[selectedLevel.attr("level")].output;
-		for (var i = 0; i < input_list.length; i++) {
-			var result = runTest(input_list[i], output_list[i], i+1);
+		let input_list = levels[selectedLevel.attr("level")].input;
+		let output_list = levels[selectedLevel.attr("level")].output;
+		for (let i = 0; i < input_list.length; i++) {
+			let result = runTest(input_list[i], output_list[i], i+1);
 			if (!result) {
 				break;
 			}

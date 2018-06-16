@@ -8,7 +8,7 @@ CodeMirror.defineMode("thue", function() {
 	return {
 		token: function(stream, state) {
 
-			if (stream.match("->") ) {
+			if (stream.match(" -> ")) {
 				return "keyword";
 			} else {
 				stream.next();
@@ -33,20 +33,6 @@ $(document).ready(function() {
 		theme: "duotone-dark",
 		lineNumbers: true,
 		mode: "thue"
-	});
-
-	// Levels
-	$('.level').on('click', function() {
-		// Remove last selected level style
-		if (selectedLevel != null) {
-			selectedLevel.css('box-shadow', 'none');
-			var html = selectedLevel.html();
-		}
-		// Set new selected level
-		selectedLevel = $(this);
-		selectedLevel.css('box-shadow', 'inset 5px 0 0 0 #D7443F');
-		terminal.echo('[[b;green;]' + selectedLevel.html() + ']');
-		terminal.echo(levels[selectedLevel.attr('level')].description);
 	});
 
 	// Buttons
