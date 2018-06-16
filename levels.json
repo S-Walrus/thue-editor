@@ -4,13 +4,13 @@
   	"description": "At this level you must get input and put it to the main string\nTo replace [a] with the input string, type [a] -> ~\nAll chars exept of digits are free\n[[b;yellow;]123 => 123]",
   	"input": ["1", "123", "968749", "000000", "0100011100101"],
   	"output": ["1", "123", "968749", "000000", "0100011100101"]
-  }
+  },
   {
   	"title": "Output1",
   	"description": "At this level you must get input and put it to the main string\nTo replace [a] with the input string, type [a] -> ~\nAll chars exept of digits are free\n[[b;yellow;]123 => 123]",
   	"input": ["1", "123", "968749", "000000", "0100011100101"],
   	"output": ["1", "123", "968749", "000000", "0100011100101"]
-  }
+  },
   {
   	"title": "Output2",
   	"description": "At this level you must get input and put it to the main string\nTo replace [a] with the input string, type [a] -> ~\nAll chars exept of digits are free\n[[b;yellow;]123 => 123]",
