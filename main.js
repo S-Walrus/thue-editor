@@ -3,6 +3,7 @@ let codemirror;
 let input = [];
 let defaultPrompt;
 let selectedLevel;
+let problems;
 
 CodeMirror.defineMode("thue", function() {
 	return {
@@ -19,6 +20,31 @@ CodeMirror.defineMode("thue", function() {
 });
 
 $(document).ready(function() {
+	// Download tests' data
+	// The file is downloaded from GitHub because it throws an error when the file is downloaded from local server
+	$.getJSON("https://raw.githubusercontent.com/S-Walrus/thue-editor/master/levels.json", function(data) {
+		problems = data;
+		// Generate HTML for level box
+		for (let i = 0; i < data.length; i++) {
+			$('#level-box').append('<div class="level" level=' + i + '>' + data[i].title + '</div>');
+		};
+
+		// On click
+		$('.level').on('click', function() {
+			// Remove last selected level style
+			if (selectedLevel != null) {
+				selectedLevel.css('box-shadow', 'none');
+				let html = selectedLevel.html();
+			}
+			// Set new selected level
+			selectedLevel = $(this);
+			selectedLevel.css('box-shadow', 'inset 5px 0 0 0 #D7443F');
+			terminal.echo(' ');
+			terminal.echo('[[b;green;]' + selectedLevel.html() + ']');
+			terminal.echo(problems[selectedLevel.attr('level')].description);
+		});
+	});
+
 	// Init the terminal
 	terminal = $('#terminal').terminal(function(command, term) {
 		input.push(command);
@@ -49,7 +75,13 @@ $(document).ready(function() {
 	});
 
 	$('#check').on('click', function() {
-		check();
+		if (selectedLevel != undefined) {
+			let inputList = problems[selectedLevel.attr("level")].input;
+			let outputList = problems[selectedLevel.attr("level")].output;
+			check(codemirror.getValue(), inputList, outputList);
+		} else {
+			terminal.error('Select a level to run tests');
+		}
 	});
 });
 
@@ -72,5 +104,5 @@ function echoGreen(text) {
 }
 
 function error(text) {
-	reminal.error(text);
+	terminal.error(text);
 }

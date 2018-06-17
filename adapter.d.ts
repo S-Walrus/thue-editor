@@ -1,4 +1,5 @@
 declare var input: Array<string>;
+declare var problems: JSON;
 
 declare function setPrompt(text: string) : void;
 declare function setDefaultPrompt() : void;

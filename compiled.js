@@ -1,3 +1,55 @@
+function check(code, inputList, outputList) {
+    kill();
+    var lines = code.split('\n');
+    var program = [];
+    lines.slice(0, -1).forEach(function (item, i) {
+        program.push(item.split(' -> '));
+    });
+    var mainstring = lines[lines.length - 1];
+    for (var i = 0; i < outputList.length; i++) {
+        var result = runTest(program, mainstring, inputList[i]);
+        if (result == outputList[i]) {
+            echoGreen('Test ' + (i + 1) + ' completed');
+        }
+        else {
+            error('Wrong answer at test ' + (i + 1));
+            return false;
+        }
+    }
+    echoGreen('All tests completed!');
+    return true;
+}
+function runTest(program, mainstring, input) {
+    var edited = true;
+    var mainstringSave;
+    while (edited) {
+        mainstringSave = mainstring;
+        program.forEach(function (command, i) {
+            if (command.length == 2) {
+                var index = mainstring.indexOf(command[0]);
+                if (index != -1) {
+                    var a = mainstring.slice(0, index);
+                    var b = mainstring.slice(index + command[0].length);
+                    if (command[1] == '~') {
+                        if (input.length != 0) {
+                            mainstring = a + input.pop() + b;
+                        }
+                    }
+                    else if (command[1][0] == '~') {
+                        mainstring = a + b;
+                    }
+                    else {
+                        mainstring = a + command[1] + b;
+                    }
+                }
+            }
+        });
+        if (mainstring == mainstringSave) {
+            edited = false;
+        }
+    }
+    return mainstring;
+}
 var interval = 100;
 var inputRequest = 'Enter a string:';
 var mainstring = '';
@@ -25,9 +77,6 @@ function run(code) {
                 var edited = passProgram(program_1);
                 if (!edited) {
                     finish();
-                }
-                else {
-                    iterCount++;
                 }
             }
         }, interval);
@@ -83,6 +132,7 @@ function passProgram(program) {
                     mainstring = a + item[1] + b;
                 }
                 edited = true;
+                iterCount++;
             }
         }
     });
